@@ -1,24 +1,25 @@
 #!/usr/bin/python3
 
 if __name__ == "__main__":
-    import sys
-    import calculator_1 as calc
 
-    if len(sys.argv) != 4:
+    """Handle basic arithmetic operations."""
+
+    from calculator_1 import add, sub, mul, div  
+    import sys   
+
+    if len(sys.argv) - 1 != 3:  # Check if the number 
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         sys.exit(1)
 
-        a = int(sys.argv[1])
-        b = int(sys.argv[3])
-
-        if sys.argv[2] == "+":
-            print("{:d} + {:d} = {:d}".format(a, b, calc.add(a, b)))
-        elif sys.argv[2] == "-":
-            print("{:d} - {:d} = {:d}".format(a, b, calc.sub(a, b)))
-        elif sys.argv[2] == "*":
-            print("{:d} * {:d} = {:d}".format(a, b, calc.mul(a, b)))
-        elif sys.argv[2] == "/":
-            print("{:d} / {:d} = {:d}".format(a, b, calc.div(a, b)))
-        else:
-            print("Unknown operator. Available operators: +, -, * and /")
+        valid_operators = "+-*/"
+        operator = sys.argv[2]
+        if operator not in valid_operators:
+            print("Unknown operator. Available operators:", valid_operators)
             sys.exit(1)
+
+            a = int(sys.argv[1])
+            b = int(sys.argv[3])
+
+            operations = {"+": add, "-": sub, "*": mul, "/": div}
+            result = operations[operator](a, b)
+            print("{} {} {} = {}".format(a, operator, b, result))
