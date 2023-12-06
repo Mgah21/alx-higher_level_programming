@@ -1,13 +1,9 @@
 #!/usr/bin/python3
-
 def uniq_add(my_list=[]):
-    """
-    A function that adds all unique
-    """
-    new_list = []
-    sum = 0
+    total = 0
+    seen = set()
     for num in my_list:
-        if num not in new_list:
-            sum += num
-            new_list.append(num)
-            return sum
+        if num not in seen:
+            total += num
+            seen.add(num)
+            return total
