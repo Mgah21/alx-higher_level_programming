@@ -24,12 +24,13 @@ def roman_to_int(roman_string):
     }
 
     result = 0
-    for i in range(len(roman_string)):
+    for i in range(0, len(roman_string), 2):
         current_value = roman_numeral_map[roman_string[i]]
-        if i + 1 < len(roman_string) and roman_numeral_map[roman_string[i + 1]] > current_value:
+        next_value = roman_numeral_map[roman_string[i + 1]]
+        if current_value < next_value:
             result -= current_value
         else:
             result += current_value
 
             return result
-                                      
+                                          
