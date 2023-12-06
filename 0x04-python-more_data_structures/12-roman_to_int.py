@@ -10,10 +10,10 @@ def roman_to_int(roman_string):
     An integer representing the value of the Roman numeral.
     """
 
-    if not isinstance(roman_string, str) or roman_string is None:
+    if not isinstance(roman_string, str) or not roman_string:
         return 0
 
-    roman_numeral_map = {
+    roman_map = {
         "I": 1,
         "V": 5,
         "X": 10,
@@ -24,13 +24,14 @@ def roman_to_int(roman_string):
     }
 
     result = 0
-    for i in range(0, len(roman_string), 2):
-        current_value = roman_numeral_map[roman_string[i]]
-        next_value = roman_numeral_map[roman_string[i + 1]]
-        if current_value < next_value:
-            result -= current_value
+    previous_value = 0
+
+    for char in roman_string:
+        current_value = roman_map[char]
+        if previous_value < current_value:
+            result -= previous_value * 2
         else:
             result += current_value
+            previous_value = current_value
 
             return result
-                                          
